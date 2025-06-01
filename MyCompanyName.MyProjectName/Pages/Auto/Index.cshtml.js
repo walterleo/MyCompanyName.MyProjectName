@@ -22,6 +22,10 @@ $(function () {
                                     onclick="eliminarAuto('${auto.id}')">
                                 Eliminar
                             </button>
+                             <button class="btn btn-secondary btn-sm"
+                                    onclick="mostrarModalEditar('${auto.id}','${auto.marca}','${auto.modelo}','${auto.color}','${auto.año}')">
+                                Editar
+                            </button>
                         </td>
                     </tr>
                 `;
@@ -87,4 +91,60 @@ $(function () {
             abp.message.error('No se pudo eliminar el auto.');
         });
     };
+
+    // ——————————————————————————————————————————————
+    // 4) Función global para mostrar el modal de “Editar”
+    //     Recibe los datos actuales del auto para precargarlos
+    // ——————————————————————————————————————————————
+    window.mostrarModalEditar = function (id, marca, modelo, color, año) {
+        // Guarda el ID en el campo oculto
+        $('#EditarAutoId').val(id);
+
+        // Precarga los valores en los inputs del modal
+        $('#EditarAutoMarca').val(marca);
+        $('#EditarAutoModelo').val(modelo);
+        $('#EditarAutoColor').val(color);
+        $('#EditarAutoAño').val(año);
+
+        // Muestra el modal
+        $('#modalEditarAuto').modal('show');
+    };
+
+    // ——————————————————————————————————————————————
+    // 5) Evento “click” en el botón “Guardar Cambios” del modal
+    // ——————————————————————————————————————————————
+    $('#GuardarCambiosAuto').click(function () {
+        const id = $('#EditarAutoId').val();
+        const marca = $('#EditarAutoMarca').val().trim();
+        const modelo = $('#EditarAutoModelo').val().trim();
+        const color = $('#EditarAutoColor').val().trim();
+        const año = parseInt($('#EditarAutoAño').val());
+
+        if (!marca || !modelo || !color || isNaN(año)) {
+            abp.message.warn('Por favor, completa todos los campos.');
+            return;
+        }
+
+        // Llamada PUT /api/app/auto/{id} con el DTO
+        abp.ajax({
+            url: `/api/app/auto/${id}`,  // UpdateAsync(id, CreateUpdateAutoDto)
+            type: 'PUT',
+            data: JSON.stringify({
+                marca: marca,
+                color: color,
+                modelo: modelo,
+                anio: año     // coincide con CreateUpdateAutoDto.Anio
+            })
+        }).done(function () {
+            // Cierra el modal
+            $('#modalEditarAuto').modal('hide');
+
+            // Recarga la tabla
+            cargarAutos();
+            abp.message.success('Auto actualizado correctamente.');
+        }).fail(function (xhr) {
+            console.error('Error al actualizar auto:', xhr);
+            abp.message.error('No se pudo actualizar el auto.');
+        });
+    });
 });

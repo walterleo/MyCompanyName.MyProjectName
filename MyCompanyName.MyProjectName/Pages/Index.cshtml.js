@@ -24,7 +24,7 @@
             $('#NewItemText').val('');
         });
     });
-    ////////////////////Paul
+    ////////////////////
     $('#NewItemForm1').submit(function (e) {
         e.preventDefault();
 
