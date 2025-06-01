@@ -1,0 +1,99 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using MyCompanyName.MyProjectName.Localization
+@using Volo.Abp.Users
+@inject IHtmlLocalizer<MyProjectNameResource> L
+@model MyCompanyName.MyProjectName.Pages.IndexModel
+
+@section styles {
+    <abp-style src="/Pages/Index.cshtml.css" />
+}
+@section scripts {
+    <abp-script src="/Pages/Index.cshtml.js" />
+}
+
+
+
+<div class="container">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+              
+                Personas
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>
+            <!-- FORM FOR NEW TODO ITEMS -->
+            <form id="NewItemForm1" class="form-inline">
+                <abp-row>
+                    <abp-column size="_4">
+                       <a>Nombre</a> <input id="NewItemName"
+                               type="text"
+                               class="form-control mr-2"
+                               placeholder="@L["EnterText"]">
+                        <a>Apellido</a> <input id="NewItemLastName"
+                               type="text"
+                               class="form-control mr-2"
+                               placeholder="@L["EnterText"]">
+                    </abp-column>
+                    <abp-column>
+                        <button type="submit" class="btn btn-primary">@L["Submit"]</button>
+                    </abp-column>
+                </abp-row>
+            </form>
+
+            <!-- TODO ITEMS LIST -->
+            <table style="width:50%" border="1" id="TodoList2">
+                <tr>
+                    <td style="width:20%">Delete</td>
+                    <td style="width:20%">Update</td>
+
+                    <td>Nombre</td>
+                    <td>Apellido </td>
+                </tr>
+                @foreach (var todoItem in Model.PersonasItems)
+                {
+                    <tr data-id="@todoItem.Id">
+                        <td data-id="@todoItem.Id"><i  class="fa fa-trash-o icono-eliminar"></i></td>
+                        <td data-id="@todoItem.Id"><i class="fa fa-pencil icono-editar"></i></td>
+
+                        <td>@todoItem.Name</td>
+                        <td>@todoItem.LastName</td>
+                    </tr>    
+                }
+            </table>
+
+            
+        </abp-card-body>
+    </abp-card>
+</div>
+
+<div class="modal fade" id="miSegundoModalEditar" tabindex="-1" role="dialog" aria-labelledby="miSegundoModalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="miSegundoModalEditarLabel">Editar Persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formulario-editar-persona">
+                    <input type="hidden" id="editar-persona-id" name="Id">
+                    <div class="form-group">
+                        <label for="editar-persona-nombre">Nombre</label>
+                        <input type="text" class="form-control" id="editar-persona-nombre" name="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-persona-apellido">Apellido</label>
+                        <input type="text" class="form-control" id="editar-persona-apellido" name="LastName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cerrar-modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="guardar-cambios-persona">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>

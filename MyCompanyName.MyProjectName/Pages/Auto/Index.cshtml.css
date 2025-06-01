@@ -1,0 +1,22 @@
+﻿/* Pages/Auto/Index.cshtml.css */
+
+/* Asegura que las celdas de la tabla estén centradas verticalmente */
+table#AutoTableBody tr td {
+    vertical-align: middle;
+}
+
+/* Margen interno en inputs para mejor visibilidad */
+#NewAutoForm .form-control {
+    width: 150px;
+}
+
+/* Si quieres resaltar la cabecera de la tabla */
+table.table thead {
+    background-color: #f5f5f5;
+}
+
+/* Botón de eliminar alineado */
+.table .btn-danger {
+    padding: 2px 8px;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,7 @@
+{
+  "packages": {
+    "MyCompanyName.MyProjectName": {
+      "path": "MyCompanyName.MyProjectName/MyCompanyName.MyProjectName.abppkg"
+    }
+  }
+}

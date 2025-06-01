@@ -1,0 +1,61 @@
+﻿@page
+@model MyCompanyName.MyProjectName.Web.Pages.Auto.IndexModel
+
+@{
+  ViewData["Title"] = "Gestión de Autos";
+}
+
+@section styles {
+  <abp-style src="/Pages/Auto/Index.cshtml.css" />
+}
+
+<abp-card>
+  <abp-card-header>
+    <abp-card-title>Autos</abp-card-title>
+  </abp-card-header>
+  <abp-card-body>
+    <form id="NewAutoForm" class="form-inline mb-3">
+      <input id="NewAutoMarca"
+             type="text"
+             class="form-control mr-2"
+             placeholder="Marca" />
+      <input id="NewAutoModelo"
+             type="text"
+             class="form-control mr-2"
+             placeholder="Modelo" />
+      <input id="NewAutoColor"
+             type="text"
+             class="form-control mr-2"
+             placeholder="Color" />
+      <input id="NewAutoAño"
+             type="number"
+             class="form-control mr-2"
+             placeholder="Año" />
+      <button id="AddAutoBtn"
+              type="button"
+              class="btn btn-primary">
+        Agregar Auto
+      </button>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Color</th>
+          <th>Año</th>
+          <th style="width: 120px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="AutoTableBody">
+        @* Opcional: si deseas precargar la tabla en el servidor *@
+        @* @foreach (var auto in Model.AutoItems) { … } *@
+      </tbody>
+    </table>
+  </abp-card-body>
+</abp-card>
+
+@section scripts {
+  <abp-script src="/Pages/Auto/Index.cshtml.js" />
+}

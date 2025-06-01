@@ -1,0 +1,9 @@
+{
+  "id": "0cac20ae-4c57-410c-985b-1faf7c50521b",
+  "template": "empty",
+  "modules": {
+    "MyCompanyName.MyProjectName": {
+      "path": "MyCompanyName.MyProjectName.abpmdl"
+    }
+  }
+}
